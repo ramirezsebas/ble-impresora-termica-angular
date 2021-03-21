@@ -19,7 +19,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ThermalPrinterComponent } from './componentes/thermal-printer/thermal-printer.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, HomeComponent, ThermalPrinterComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    HomeComponent,
+    ThermalPrinterComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
