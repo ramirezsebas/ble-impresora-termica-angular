@@ -15,9 +15,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ThermalPrinterComponent } from './componentes/thermal-printer/thermal-printer.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, HomeComponent],
+  declarations: [AppComponent, NavbarComponent, HomeComponent, ThermalPrinterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,6 +32,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatCardModule,
     MatButtonModule,
     MatButtonToggleModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

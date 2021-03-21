@@ -1,0 +1,60 @@
+<div
+  class="container d-flex flex-column justify-content-center align-items-center"
+>
+  <img
+    width="400"
+    height="400"
+    src="https://image.freepik.com/free-vector/printer-with-paper-illustration_138676-2396.jpg"
+    alt=""
+  />
+
+  <div class="d-flex">
+    <div class="d-flex flex-column read-operations m-3">
+      <h1 class="text-center">READ</h1>
+      <button
+        class="mt-2"
+        (click)="getDeviceName()"
+        mat-raised-button
+        color="primary"
+      >
+        Nombre de la Impresora Térmica
+      </button>
+      <button
+        class="mt-2"
+        (click)="getSoftwareRevision()"
+        mat-raised-button
+        color="primary"
+      >
+        Revision del Software de la Impresora Térmica
+      </button>
+      <button
+        class="mt-2"
+        (click)="getHardwareRevision()"
+        mat-raised-button
+        color="primary"
+      >
+        Revision del Hardware de la Impresora Térmica
+      </button>
+      <button
+        class="mt-2"
+        (click)="getNumeroModelo()"
+        mat-raised-button
+        color="primary"
+      >
+        Numero de Modelo de la Impresora Térmica
+      </button>
+      <button
+        class="mt-2"
+        (click)="getNombreFabrica()"
+        mat-raised-button
+        color="primary"
+      >
+        Nombre de la Fabrica de la Impresora Térmica
+      </button>
+    </div>
+    <!-- <div class="d-flex flex-column write-operations m-3">
+      <h1 class="text-center">Write</h1>
+      <button mat-raised-button color="primary">Print</button>
+    </div> -->
+  </div>
+</div>
