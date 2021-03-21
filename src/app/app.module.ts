@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './componentes/shared/navbar/navbar.component';
 
+import { WebBluetoothModule } from '@manekinekko/angular-web-bluetooth';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -19,6 +21,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    WebBluetoothModule.forRoot({
+      enableTracing: true, // or false, this will enable logs in the browser's console
+    }),
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
