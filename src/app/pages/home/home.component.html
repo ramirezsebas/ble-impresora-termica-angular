@@ -1,4 +1,4 @@
-<div class="container d-flex justify-content-center mt-4">
+<div *ngIf="!device" class="container d-flex justify-content-center mt-4">
   <mat-card style="max-width: 600px">
     <img
       mat-card-image
@@ -6,9 +6,19 @@
       alt="Photo of a Shiba Inu"
     />
     <mat-card-actions class="d-flex justify-content-center">
-      <button (click)="buscarImpresora()" mat-raised-button color="primary">
-        CONECTARSE A LA IMPRESORA TERMICA.
+      <button
+        class="d-flex justify-content-center align-items-center"
+        (click)="buscarImpresora()"
+        mat-raised-button
+        color="primary"
+      >
+        <span>CONECTARSE A LA IMPRESORA TERMICA</span>
       </button>
     </mat-card-actions>
   </mat-card>
 </div>
+
+<app-thermal-printer
+  *ngIf="device"
+  [printerDevice]="device"
+></app-thermal-printer>
