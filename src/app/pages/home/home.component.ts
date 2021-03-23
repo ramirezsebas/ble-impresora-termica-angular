@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -9,15 +10,13 @@ import { PrinterService } from 'src/app/services/printer.service';
   styles: [],
 })
 export class HomeComponent implements OnInit {
-  device!: BluetoothDevice;
-  isDeviceConnected: boolean;
+  device!: null | BluetoothDevice;
+
   constructor(
     private _printerService: PrinterService,
     private _snackBar: MatSnackBar,
     private _router: Router
-  ) {
-    this.isDeviceConnected = false;
-  }
+  ) {}
 
   ngOnInit(): void {}
 
@@ -31,7 +30,15 @@ export class HomeComponent implements OnInit {
             verticalPosition: 'top',
           });
           this.device = (gatt as BluetoothRemoteGATTServer).device;
-          this.isDeviceConnected = true;
+
+          this.device.addEventListener('gattserverdisconnected', () => {
+            this._snackBar.open('Se ha Desconectado', '', {
+              duration: 2000,
+              verticalPosition: 'top',
+            });
+
+            this.device = null;
+          });
         } else {
           this._snackBar.open('Conexion Fallado', '', {
             duration: 1500,
