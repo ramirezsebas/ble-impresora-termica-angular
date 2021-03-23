@@ -16,7 +16,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { ThermalPrinterComponent } from './componentes/thermal-printer/thermal-printer.component';
+import { ServicesBluetoothComponent } from './componentes/shared/services-bluetooth/services-bluetooth.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,7 @@ import { ThermalPrinterComponent } from './componentes/thermal-printer/thermal-p
     NavbarComponent,
     HomeComponent,
     ThermalPrinterComponent,
+    ServicesBluetoothComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +43,9 @@ import { ThermalPrinterComponent } from './componentes/thermal-printer/thermal-p
     MatButtonModule,
     MatButtonToggleModule,
     MatSnackBarModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

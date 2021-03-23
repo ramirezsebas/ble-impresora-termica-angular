@@ -11,3 +11,7 @@ export interface printer {
     action: string
   ): Observable<string>;
 }
+
+interface ReadOperations {}
+
+interface WriteOperations {}

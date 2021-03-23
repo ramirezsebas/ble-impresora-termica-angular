@@ -1,0 +1,50 @@
+<div
+  class="container d-flex flex-column justify-content-center align-items-center"
+>
+  <img
+    width="400"
+    height="400"
+    src="https://image.freepik.com/free-vector/printer-with-paper-illustration_138676-2396.jpg"
+    alt=""
+  />
+
+  <div class="d-flex">
+    <!--Read/Write Operations-->
+    <div>
+      <div class="d-flex flex-column m-3" *ngIf="type === 'read'">
+        <button
+          *ngFor="let func of functionalities"
+          class="mt-2"
+          (click)="selectFunc(func)"
+          mat-raised-button
+          color="primary"
+        >
+          {{ func }}
+        </button>
+      </div>
+      <div class="d-flex flex-column" *ngIf="type === 'write'">
+        <form
+          style="
+            min-width: 450px;
+            max-width: 800px;
+            width: 100%;
+            margin-top: 50px;
+          "
+        >
+          <mat-form-field style="width: 100%">
+            <mat-label>¿Que deseas Imprimir?</mat-label>
+            <textarea #value matInput></textarea>
+          </mat-form-field>
+        </form>
+        <button
+          (click)="imprimir(value.value)"
+          class="mt-2"
+          mat-raised-button
+          color="primary"
+        >
+          Imprimir Texto
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
