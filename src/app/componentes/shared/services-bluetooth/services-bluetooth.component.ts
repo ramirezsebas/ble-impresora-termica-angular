@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { PrinterService } from 'src/app/services/printer.service';
 import {
   GENERIC_ACCESS_SERVICE,
   DEVICE_INFO_SERVICE,
+  PRINTER_SERVICE_1,
 } from 'src/app/utils/config_printer';
 import Swal from 'sweetalert2';
 
@@ -13,6 +15,7 @@ import Swal from 'sweetalert2';
   styles: [],
 })
 export class ServicesBluetoothComponent implements OnInit {
+  private _MAX_BYTE: number = 300;
   @Input()
   printerDevice!: BluetoothDevice;
   @Input() functionalities: string[];
@@ -129,9 +132,35 @@ export class ServicesBluetoothComponent implements OnInit {
 
   //Write Operations
 
-  imprimir(text: string) {
-    if (text.length > 0) {
-      console.log(text);
+  async imprimir(text: string) {
+    try {
+      let tempText = '';
+
+      for (let index = 0; index < text.length; index += this._MAX_BYTE) {
+        tempText = text.substr(index, this._MAX_BYTE);
+        console.log(tempText);
+        //Manipular substring
+        await this.sendPrinter(tempText);
+        tempText = '';
+      }
+      await this.sendPrinter('\n\n\n');
+    } catch (error) {
+      Swal.fire({
+        title: error,
+        icon: 'error',
+      });
     }
+  }
+
+  private sendPrinter(tempText: string) {
+    return this._printerService
+      .getOperation(
+        this.printerDevice,
+        PRINTER_SERVICE_1.uuid,
+        PRINTER_SERVICE_1.characteristics[1].uuid,
+        'write',
+        tempText
+      )
+      .toPromise();
   }
 }

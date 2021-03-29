@@ -39,13 +39,19 @@ export class PrinterService implements printer {
     device: BluetoothDevice,
     serviceUUID: BluetoothServiceUUID,
     characteristicUUID: BluetoothCharacteristicUUID,
-    action = 'read'
-  ) {
+    action = 'read',
+    data?: string
+  ): Observable<any> {
     switch (action) {
       case 'read':
         return this.readPrinterValue(device, serviceUUID, characteristicUUID);
-
-        break;
+      case 'write':
+        return this.writePrinterValue(
+          device,
+          serviceUUID,
+          characteristicUUID,
+          data as string
+        );
 
       default:
         return this.readPrinterValue(device, serviceUUID, characteristicUUID);
@@ -81,6 +87,52 @@ export class PrinterService implements printer {
         let arr = new Uint8Array(value.buffer);
 
         return enc.decode(arr);
+      })
+    );
+  }
+
+  private writePrinterValue(
+    device: BluetoothDevice,
+    serviceUUID: BluetoothServiceUUID,
+    characteristicUUID: BluetoothCharacteristicUUID,
+    data: string
+  ) {
+    return this._ble.connectDevice$(device).pipe(
+      mergeMap((server: void | BluetoothRemoteGATTServer) => {
+        return this._ble.getPrimaryService$(
+          server as BluetoothRemoteGATTServer,
+          serviceUUID
+        );
+      }),
+
+      mergeMap((service: BluetoothRemoteGATTService) => {
+        return this._ble.getCharacteristic$(service, characteristicUUID);
+      }),
+
+      mergeMap((characteristic: void | BluetoothRemoteGATTCharacteristic) => {
+        let encoded = new TextEncoder();
+
+        //Para poder saltar una linea debemos nosotros agregar un 10 al arraybuffer.
+        //No podemos solo realizar un encode al string debe ser de cada caracter.
+        //No puede pasar mas de 512 bytes
+        //Para mobile tiene que estar en https
+        console.log('Entrando');
+        let arrayBits: number[] = [];
+        console.log('Texto Cortado');
+        console.log(data.length);
+        console.log(data.split(''));
+
+        data.split('').forEach((caracter: string) => {
+          arrayBits.push(encoded.encode(caracter)[0]);
+        });
+
+        return (characteristic as BluetoothRemoteGATTCharacteristic).writeValueWithResponse(
+          new Uint8Array(arrayBits)
+        );
+        // return this._ble.writeValue$(
+        //   characteristic as BluetoothRemoteGATTCharacteristic,
+        //   new Uint8Array(arrayBits)
+        // );
       })
     );
   }
