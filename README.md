@@ -1,25 +1,13 @@
 # Aplicacion Web de BLE con Impresora Termica
+Aplicacion web que se puede conectar a un impresora termica mediante el la API de Web Bluetooth.
+Debes configurar el acceso a tu dispositivo, servicio y caracteristica.
 
----
+Paquete utilizado es: https://github.com/manekinekko/angular-web-bluetooth
 
-![image](https://user-images.githubusercontent.com/61977214/111893076-fd478580-89de-11eb-9657-49baf11e1861.png)
+![gh1](https://user-images.githubusercontent.com/61977214/113052886-ab88c300-9175-11eb-98af-1063a8aa690e.png)
 
----
 
-![image](https://user-images.githubusercontent.com/61977214/111893095-0df7fb80-89df-11eb-885e-1d836b5706c1.png)
+![gh2](https://user-images.githubusercontent.com/61977214/113052909-b3486780-9175-11eb-8d61-8d64d852acef.png)
 
----
 
-![image](https://user-images.githubusercontent.com/61977214/111893104-210acb80-89df-11eb-8969-4aba739af418.png)
-
----
-
-![image](https://user-images.githubusercontent.com/61977214/111893168-7646dd00-89df-11eb-9a57-81c497de6a8b.png)
-
----
-
-![image](https://user-images.githubusercontent.com/61977214/111893116-3d0e6d00-89df-11eb-82fd-fd6bde1c1145.png)
-
----
-
-![image](https://user-images.githubusercontent.com/61977214/111893136-4d264c80-89df-11eb-8ae5-5e30da6b4e82.png)
+![gh5](https://user-images.githubusercontent.com/61977214/113052976-c8bd9180-9175-11eb-9bb2-b1a83e109c77.png)
