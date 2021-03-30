@@ -233,30 +233,6 @@ export class ServicesBluetoothComponent implements OnInit {
     }
   }
 
-  private trimSentence(text?: String) {
-    let fin = 0;
-    let textTemp = '';
-
-    for (
-      let index = 0;
-      index < this._ticket.join('').split(' ').length;
-      index++
-    ) {
-      const element = this._ticket.join('').split(' ')[index];
-      fin += element.length + 1;
-      if (fin > 31) {
-        console.log('Ha superado');
-        textTemp += '\n';
-        textTemp += element;
-        fin = 0;
-      } else {
-        textTemp += element;
-        textTemp += ' ';
-      }
-      console.log(textTemp);
-    }
-  }
-
   private sendPrinter(tempText: string) {
     return this._printerService
       .getOperation(
