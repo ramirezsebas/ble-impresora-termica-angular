@@ -1,9 +1,13 @@
 ![Uploading 1617136345153.jpg…]()
 # Aplicacion Web de BLE con Impresora Termica
 Aplicacion web que se puede conectar a un impresora termica mediante el la API de Web Bluetooth.
-Debes configurar el acceso a tu dispositivo, servicio y caracteristica.
 
-Paquete utilizado es: https://github.com/manekinekko/angular-web-bluetooth
+Debes configurar el acceso a tu dispositivo, servicio y caracteristicas.
+
+Observaciones:
+- Paquete utilizado es: https://github.com/manekinekko/angular-web-bluetooth
+- Puede ser utilizado para conectarse a cualquier dispositivo BLE(Bluetooth 4.0)
+
 
 ![gh1](https://user-images.githubusercontent.com/61977214/113052886-ab88c300-9175-11eb-98af-1063a8aa690e.png)
 
