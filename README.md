@@ -1,3 +1,4 @@
+![Uploading 1617136345153.jpg…]()
 # Aplicacion Web de BLE con Impresora Termica
 Aplicacion web que se puede conectar a un impresora termica mediante el la API de Web Bluetooth.
 Debes configurar el acceso a tu dispositivo, servicio y caracteristica.
