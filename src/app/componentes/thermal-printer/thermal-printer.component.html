@@ -9,11 +9,21 @@
   </mat-tab>
 
   <mat-tab>
-    <ng-template mat-tab-label> WRITE </ng-template>
+    <ng-template mat-tab-label> WRITE TEXT</ng-template>
     <app-services-bluetooth
       [printerDevice]="printerDevice"
       [functionalities]="writeFuncionalities"
       [type]="'write'"
+    ></app-services-bluetooth>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label> WRITE TICKET</ng-template>
+    <app-services-bluetooth
+      [printerDevice]="printerDevice"
+      [functionalities]="writeFuncionalities"
+      [type]="'write'"
+      [esInput]="false"
     ></app-services-bluetooth>
   </mat-tab>
 </mat-tab-group>

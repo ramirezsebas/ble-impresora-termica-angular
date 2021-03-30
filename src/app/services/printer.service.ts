@@ -112,27 +112,17 @@ export class PrinterService implements printer {
       mergeMap((characteristic: void | BluetoothRemoteGATTCharacteristic) => {
         let encoded = new TextEncoder();
 
-        //Para poder saltar una linea debemos nosotros agregar un 10 al arraybuffer.
         //No podemos solo realizar un encode al string debe ser de cada caracter.
-        //No puede pasar mas de 512 bytes
+        //No puede pasar mas de 512 bytes - Recibe 300 bytes primero y asi sucesivamente
         //Para mobile tiene que estar en https
-        console.log('Entrando');
-        let arrayBits: number[] = [];
-        console.log('Texto Cortado');
-        console.log(data.length);
-        console.log(data.split(''));
 
+        let arrayBits: number[] = [];
         data.split('').forEach((caracter: string) => {
           arrayBits.push(encoded.encode(caracter)[0]);
         });
-
         return (characteristic as BluetoothRemoteGATTCharacteristic).writeValueWithResponse(
           new Uint8Array(arrayBits)
         );
-        // return this._ble.writeValue$(
-        //   characteristic as BluetoothRemoteGATTCharacteristic,
-        //   new Uint8Array(arrayBits)
-        // );
       })
     );
   }

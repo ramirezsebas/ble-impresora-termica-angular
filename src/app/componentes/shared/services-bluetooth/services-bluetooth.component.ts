@@ -1,12 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+
 import { Router } from '@angular/router';
 
 import { PrinterService } from 'src/app/services/printer.service';
+
 import {
   GENERIC_ACCESS_SERVICE,
   DEVICE_INFO_SERVICE,
   PRINTER_SERVICE_1,
 } from 'src/app/utils/config_printer';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,11 +23,32 @@ export class ServicesBluetoothComponent implements OnInit {
   printerDevice!: BluetoothDevice;
   @Input() functionalities: string[];
   @Input() type: string = '';
+  @Input() esInput: boolean = true;
+  private _ticket: String[] = [];
+  private _textTicket: String = '';
+
+  @ViewChild('myTicket') el?: ElementRef;
+
   constructor(
     private _router: Router,
     private _printerService: PrinterService
   ) {
     this.functionalities = [];
+  }
+
+  ngAfterViewInit() {
+    if (this.el) {
+      let DOMelements = this.el?.nativeElement?.children;
+
+      for (let index = 1; index < DOMelements.length; index++) {
+        const element = DOMelements[index];
+        this._textTicket += element.innerText + '\n';
+
+        this._ticket.push(element.innerText);
+        this._ticket.push('\n');
+      }
+    }
+    console.log(this._ticket);
   }
 
   ngOnInit(): void {
@@ -132,7 +156,7 @@ export class ServicesBluetoothComponent implements OnInit {
 
   //Write Operations
 
-  async imprimir(text: string) {
+  async imprimirTexto(text: string) {
     try {
       let tempText = '';
 
@@ -149,6 +173,87 @@ export class ServicesBluetoothComponent implements OnInit {
         title: error,
         icon: 'error',
       });
+    }
+  }
+
+  async imprimirTicket() {
+    try {
+      let tempText = '';
+      //Recorremos todas las oraciones
+      for (const sentence of this._ticket) {
+        if (sentence === '\n') {
+          // console.log('Salto de Linea');
+          // console.log(tempText);
+          tempText += '\n';
+        } else {
+          //Contador de letras de cada letra
+          let totalLetters = 0;
+
+          //Recorrer lista de palbras
+          let words = sentence.split(' ');
+          for (let index = 0; index < words.length; index++) {
+            let word = words[index];
+            totalLetters += word.length + 1;
+
+            //Si la cantidad letras supera 30 caracteres realizar un salto de linea + la palabra
+            if (totalLetters > 30) {
+              //Salto de linea + palabra
+              //Reiniciar Conteo de letras
+              if (tempText.charAt(tempText.length - 1) === ' ')
+                tempText = tempText.substring(0, tempText.length - 1);
+
+              tempText += '\n' + word + ' ';
+              totalLetters = 0;
+            } else {
+              //Sino solo agregar la palabra mas un espacio
+              tempText += word;
+              if (index < words.length - 1) tempText += ' ';
+            }
+          }
+          // console.log('Oracion');
+          // console.log(Array.from(tempText));
+        }
+      }
+      //-----------------------------------------------------------
+      let newTempText = '';
+
+      for (let index = 0; index < tempText.length; index += this._MAX_BYTE) {
+        newTempText = tempText.substr(index, this._MAX_BYTE);
+        //Manipular substring
+        await this.sendPrinter(newTempText);
+        console.log(Array.from(newTempText));
+        newTempText = '';
+      }
+      await this.sendPrinter('\n\n\n');
+    } catch (error) {
+      Swal.fire({
+        title: error,
+        icon: 'error',
+      });
+    }
+  }
+
+  private trimSentence(text?: String) {
+    let fin = 0;
+    let textTemp = '';
+
+    for (
+      let index = 0;
+      index < this._ticket.join('').split(' ').length;
+      index++
+    ) {
+      const element = this._ticket.join('').split(' ')[index];
+      fin += element.length + 1;
+      if (fin > 31) {
+        console.log('Ha superado');
+        textTemp += '\n';
+        textTemp += element;
+        fin = 0;
+      } else {
+        textTemp += element;
+        textTemp += ' ';
+      }
+      console.log(textTemp);
     }
   }
 

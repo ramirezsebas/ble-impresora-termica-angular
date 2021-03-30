@@ -2,8 +2,7 @@
   class="container d-flex flex-column justify-content-center align-items-center"
 >
   <img
-    width="400"
-    height="400"
+    width="250px"
     src="https://image.freepik.com/free-vector/printer-with-paper-illustration_138676-2396.jpg"
     alt=""
   />
@@ -22,7 +21,7 @@
           {{ func }}
         </button>
       </div>
-      <div class="d-flex flex-column" *ngIf="type === 'write'">
+      <div class="d-flex flex-column" *ngIf="type === 'write' && esInput">
         <form
           style="
             min-width: 450px;
@@ -37,12 +36,56 @@
           </mat-form-field>
         </form>
         <button
-          (click)="imprimir(value.value)"
+          (click)="imprimirTexto(value.value)"
           class="mt-2"
           mat-raised-button
           color="primary"
         >
           Imprimir Texto
+        </button>
+      </div>
+      <div class="d-flex flex-column" *ngIf="type === 'write' && !esInput">
+        <div #myTicket style="width: 220px; padding: 10px" class="card">
+          <img
+            src="https://image.freepik.com/free-vector/hand-drawn-old-money-bag_53876-15767.jpg"
+            alt="Logo"
+            width="200px"
+          />
+
+          <p>AUTOSERVICE LOS PEDROSOS DE JUAN PABLO DOMINGUEZ</p>
+
+          <p>R.U.C: 1234567-8</p>
+
+          <p>TELEFONO: 0986554321</p>
+
+          <p>SAN LORENZO - JUAN PABLO SOTELO - 978 C/ AMISTAD</p>
+
+          <p>CAJA: 1 - CAJERO: MARCOS PEREIRA</p>
+
+          <p>--------------------------------</p>
+
+          <p>FECHA: 12/12/2020</p>
+
+          <p>--------------------------------</p>
+
+          <p>SERVICIO: PERSONAL PAGO INTERNET</p>
+          <p>--------------------------------</p>
+          <p>TELEFONO: 0987162254</p>
+          <p>TICKET: 123456789</p>
+          <p>MONTO: 1.000.000.000</p>
+          <p>FORMAS DE PAGO: EFECTIVO</p>
+          <p>--------------------------------</p>
+          <p>ESTE ES SU COMPROBANTE, CONSERVALO</p>
+          <p>PAGO POR ORDEN Y CUENTA DEL EMISOR</p>
+          <p>UN SERVICIO DE PAGO FACIL</p>
+        </div>
+        <button
+          (click)="imprimirTicket()"
+          class="mt-2"
+          mat-raised-button
+          color="primary"
+        >
+          Imprimir Ticket
         </button>
       </div>
     </div>
