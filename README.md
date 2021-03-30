@@ -1,4 +1,3 @@
-![Uploading 1617136345153.jpg…]()
 # Aplicacion Web de BLE con Impresora Termica
 Aplicacion web que se puede conectar a un impresora termica mediante el la API de Web Bluetooth.
 
@@ -16,3 +15,7 @@ Observaciones:
 
 
 ![gh5](https://user-images.githubusercontent.com/61977214/113052976-c8bd9180-9175-11eb-9bb2-b1a83e109c77.png)
+
+
+
+![1617136345153](https://user-images.githubusercontent.com/61977214/113053868-cad42000-9176-11eb-8428-81f2da310084.jpg)
